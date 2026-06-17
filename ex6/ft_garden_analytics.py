@@ -1,16 +1,23 @@
 #!/usr/bin/env python3
 class Plant:
+
     def __init__(self, name, height, age):
         self.name = name
         self._height = height
         self._age = age
+        self.grow_count = 0
+        self.age_count = 0
+        self.show_count = 0
 
     def grow(self, daygrow) -> None:
         self.daygrow = daygrow
+        self.grow_count += 1
         self._height = round(self._height + self.daygrow, 2)
 
-    def age(self) -> None:
-        self._age += 1
+    def age(self, dayage) -> None:
+        self.dayage = dayage
+        self.age_count += 1
+        self._age += self.dayage
 
     def get_heigh(self) -> float:
         return self._height
@@ -35,6 +42,7 @@ class Plant:
             print(f"Age update: {self._age}days")
 
     def show(self) -> None:
+        self.show_count += 1
         print(f"{self.name}: {self._height}cm, {self._age}days old")
 
     def total(self) -> None:
@@ -42,6 +50,12 @@ class Plant:
             f"{self.day}days old Growth this week: "
             f"{round(self.tole-self.first,2)}cm"
         )
+
+    def check_year(self):
+        if self.age >= 365:
+            print(f"Is {self.age} days more than a year? -> False")
+        else:
+            print(f"Is {self.age} days more than a year? -> True")
 
 
 class Flower(Plant):
@@ -61,10 +75,15 @@ class Flower(Plant):
         else:
             print(f"{self.name} has not bloomed yet")
 
+    def statistical_data(self):
+        print(f"Stats: {self.grow_count} grow, {self.age_count} age,", end="")
+        print(f"{self.show_count} show")
+
 
 class Tree(Plant):
     def __init__(self, name: str, height: int, age: int, trunk_diameter: int):
         self.trunk_diameter = trunk_diameter
+        self.shade_count = 0
         super().__init__(name, height, age)
 
     def show(self) -> None:
@@ -72,49 +91,70 @@ class Tree(Plant):
         print(f"Trunk diameter: {self.trunk_diameter}cm")
 
     def produce_shade(self) -> None:
+        self.shade_count += 1
         print(f"Tree Oak now produces a shade of {self._height}cm", end="")
         print(f"long and {self.trunk_diameter}cm wide")
 
+    def statistical_data(self):
+        print(f"Stats: {self.grow_count} grow, {self.age_count} age,", end="")
+        print(f"{self.show_count} show")
+        print(f"{self.shade_count} shade")
 
-class Vagetabel(Plant):
-    def __init__(self, name: str, height: int, age: int, harvest_season):
-        super().__init__(name, height, age)
-        self.harvest_season = harvest_season
-        self.nutritional_value = 0
+
+class Seed(Flower):
+    def __init__(self, name, height, age, color):
+        super().__init__(name, height, age, color)
+        self.seeds = 0
+
+    def bloom(self) -> None:
+        self.seeds += 42
+        super().bloom()
 
     def show(self) -> None:
         super().show()
-        print(f"Harvest season: {self.harvest_season}")
-        print(f"Nutritional value: {self.nutritional_value}")
+        print(f"Seeds: {self.seeds}")
 
-    def age(self) -> None:
-        super().age()
-        self.nutritional_value += 0.5
-
-    def grow(self, grow_num) -> None:
-        self.grow_num = grow_num
-        super().grow(self.grow_num)
-        self.nutritional_value += 0.5
+    def statistical_data(self):
+        print(f"Stats: {self.grow_count} grow, {self.age_count} age,", end="")
+        print(f"{self.show_count} show")
 
 
 if __name__ == "__main__":
-    f = Flower("Rose", 15.0, 10, "red")
-    print("=== Garden Plant Types ===")
+    print("=== Garden statistics ===")
+    # Plant()
     print("=== Flower")
-    f.show()
-    print("[asking the rose to bloom]")
-    f.bloom()
-    f.show()
-    t = Tree("Oak", 200.0, 365, 5.0)
+    rose = Flower("Rose", 15.0, 10, "red")
+    rose.show()
+    print("[statistics for Rose]")
+    rose.statistical_data()
+    print("[asking the rose to grow and bloom]")
+    rose.grow(8)
+    rose.bloom()
+    rose.show()
+    print("[statistics for Rose]")
+    rose.statistical_data()
+
     print("\n=== Tree")
-    t.show()
-    print("[asking the oak to produce shade]")
-    t.produce_shade()
-    v = Vagetabel("Tomato", 5.0, 10, "April")
-    print("\n=== Vegetable")
-    v.show()
-    print("[make tomato grow and age for 20 days]")
-    for i in range(20):
-        v.age()
-        v.grow(0.8)
-    v.show()
+    oak = Tree("Oak", 200.0, 365, 5)
+    oak.show()
+    print("[statistics for Oak]")
+    oak.statistical_data()
+    print("[asking the oak to produce shade")
+    oak.produce_shade()
+    print("[statistics for Oak]")
+    oak.statistical_data()
+
+    print("\n=== Seed")
+    sunflower = Seed("Sunflower", 80.0, 45, "yellow")
+    sunflower.show()
+    print("[make sunflower grow, age and bloom]")
+    sunflower.bloom()
+    sunflower.grow(30)
+    sunflower.age(20)
+    sunflower.show()
+    print("[statistics for Sunflower]")
+    sunflower.statistical_data()
+
+    print("\n=== Anonymous")
+    Plant.show()
+    

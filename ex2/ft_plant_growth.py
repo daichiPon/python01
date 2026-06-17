@@ -1,32 +1,28 @@
 #!/usr/bin/env python3
-import sys
-import os
-parent_dir = os.path.dirname(os.path.dirname(__file__))
-sys.path.append(parent_dir)
-from ex1.ft_garden_data import Plant 
+class Plant:
+    def __init__(self, name: str, height: int, day: int) -> None:
+        self.name = name
+        self.height = height
+        self.day = day
+        self.first = height
 
+    def show(self) -> None:
+        print(f"{self.name}: {self.height}cm, {self.day}days old")
 
-class Plant_week(Plant):
-    def __init__(self, name, tole, day) -> None:
-        super().__init__(name, tole, day)
-        self.first = tole
-
-    def grow(self) -> None:
-        self.tole = round(self.tole + 0.8, 2)
+    def grow(self, daygrow) -> None:
+        self.daygrow = daygrow
+        self.height = round(self.height + self.daygrow, 2)
         self.day += 1
 
     def total(self) -> None:
-        print(
-            f"{self.day}days old Growth this week: "
-            f"{round(self.tole-self.first,2)}cm"
-            )
+        print(f"Growth this week: {round(self.height-self.first,2)}cm")
 
 
-rose = Plant_week("Rose", 25, 30)
-print("=== Garden Plant Growth ===", end="")
+rose = Plant("Rose", 25, 30)
+print("=== Garden Plant Growth ===")
 rose.show()
 for i in range(1, 8):
-    print("== Day " + str(i) + " ===", end="")
-    rose.grow()
+    print("== Day " + str(i) + " ===")
+    rose.grow(0.8)
     rose.show()
 rose.total()

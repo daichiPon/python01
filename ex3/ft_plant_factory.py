@@ -1,21 +1,24 @@
+#!/usr/bin/env python3
 class Plant:
-    def __init__(self, name, tole, day) -> None:
+    def __init__(self, name, height, day) -> None:
         self.name = name
-        self.tole = tole
+        self.height = height
         self.day = day
+        self.first = height
 
     def show(self) -> None:
-        print(f"{self.name}: {self.tole}cm, {self.day}days old", end="")
+        print(f"{self.name}: {self.height}cm, {self.day}days old")
 
-    def grow(self) -> None:
-        self.tole = round(self.tole + 0.8, 2)
+    def grow(self, daygrow) -> None:
+        self.daygrow = daygrow
+        self.height = round(self.height + self.daygrow, 2)
         self.day += 1
 
     def total(self) -> None:
         print(
             f"{self.day}days old Growth this week: "
-            f"{round(self.tole-self.first,2)}cm"
-            )
+            f"{round(self.height-self.first,2)}cm"
+        )
 
 
 if __name__ == "__main__":
@@ -26,5 +29,7 @@ if __name__ == "__main__":
         Plant("Sunflower", 80, 45),
         Plant("Fern", 15, 120)
     ]
+    print("== Plant Factory Output ===")
     for plant in p_arr:
+        print("Created:", end="")
         plant.show()

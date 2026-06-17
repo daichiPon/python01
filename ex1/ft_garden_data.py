@@ -1,11 +1,12 @@
+#!/usr/bin/env python3
 class Plant:
-    def __init__(self, name, tole, day) -> None:
+    def __init__(self, name, height, day) -> None:
         self.name = name
-        self.tole = tole
+        self.height = height
         self.day = day
 
     def show(self) -> None:
-        print(f"{self.name}: {self.tole}cm, {self.day}days old", end="")
+        print(f"{self.name}: {self.height}cm, {self.day}days old")
 
 
 if __name__ == "__main__":
@@ -13,7 +14,7 @@ if __name__ == "__main__":
     Sunflowe = Plant("Sunflowe", 80, 45)
     Cactus = Plant("Cactus", 15, 120)
 
-    print("=== Garden Plant Registry ===", end=(" "))
+    print("=== Garden Plant Registry ===")
     Rose.show()
     Sunflowe.show()
     Cactus.show()
