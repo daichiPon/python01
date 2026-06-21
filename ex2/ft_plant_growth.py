@@ -9,7 +9,7 @@ class Plant:
     def show(self) -> None:
         print(f"{self.name}: {self.height}cm, {self.day}days old")
 
-    def grow(self, daygrow) -> None:
+    def grow(self, daygrow:int) -> None:
         self.daygrow = daygrow
         self.height = round(self.height + self.daygrow, 2)
         self.day += 1
