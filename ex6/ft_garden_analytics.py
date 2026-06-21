@@ -5,6 +5,15 @@ class Plant:
             self._count_age = 0
             self._count_show = 0
 
+        def record_grow(self) -> None:
+            self._count_grow += 1
+
+        def record_age(self) -> None:
+            self._count_age += 1
+
+        def record_show(self) -> None:
+            self._count_show += 1
+
         def display(self) -> None:
             print(f"Stats: {self._count_grow} grow, "
                   f"{self._count_age} age, {self._count_show} show")
@@ -44,15 +53,15 @@ class Plant:
 
     def show(self) -> None:
         print(f"{self.name}: {self._height}cm, {self._age} days old")
-        self._stats._count_show += 1
+        self._stats.record_show()
 
     def grow(self, amount: float) -> None:
         self._height = round(self._height + amount, 1)
-        self._stats._count_grow += 1
+        self._stats.record_grow()
 
     def age(self, days: int) -> None:
         self._age += days
-        self._stats._count_age += 1
+        self._stats.record_age()
 
     @staticmethod
     def ft_year(age: int) -> bool:
@@ -90,6 +99,9 @@ class Tree(Plant):
             super().__init__()
             self._count_shade = 0
 
+        def record_shade(self) -> None:
+            self._count_shade += 1
+
         def display(self) -> None:
             super().display()
             print(f" {self._count_shade} shade")
@@ -114,7 +126,7 @@ class Tree(Plant):
             f"Tree {self.name} now produces a shade of "
             f"{self.get_height()}cm long and {self.trunk_diameter}cm wide."
         )
-        self._stats._count_shade += 1
+        self._stats.record_shade()
 
 
 class Seed(Flower):
