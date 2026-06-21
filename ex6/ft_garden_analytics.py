@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 class Plant:
+    show_count = 0
+    grow_count = 0
+    age_count = 0
 
     def __init__(self, name, height, age):
         self.name = name
@@ -44,6 +47,15 @@ class Plant:
     def show(self) -> None:
         self.show_count += 1
         print(f"{self.name}: {self._height}cm, {self._age}days old")
+    
+    @classmethod
+    def class_show(cls) -> None:
+        cls.show_count += 1
+        print("Unknown plant: 0.0cm, 0 days old")
+
+    @classmethod
+    def class_statistical_data(cls) -> None:
+        print(f"Stats: {cls.grow_count} grow, {cls.age_count} age, {cls.show_count} show")
 
     def total(self) -> None:
         print(
@@ -51,11 +63,12 @@ class Plant:
             f"{round(self.tole-self.first,2)}cm"
         )
 
-    def check_year(self):
-        if self.age >= 365:
-            print(f"Is {self.age} days more than a year? -> False")
+    @staticmethod
+    def check_year(age):
+        if age >= 365:
+            print(f"Is {age} days more than a year? -> True")
         else:
-            print(f"Is {self.age} days more than a year? -> True")
+            print(f"Is {age} days more than a year? -> False")
 
 
 class Flower(Plant):
@@ -121,8 +134,10 @@ class Seed(Flower):
 
 if __name__ == "__main__":
     print("=== Garden statistics ===")
-    # Plant()
-    print("=== Flower")
+    print("=== Check year-old")
+    Plant.check_year(30)
+    Plant.check_year(400)
+    print("\n=== Flower")
     rose = Flower("Rose", 15.0, 10, "red")
     rose.show()
     print("[statistics for Rose]")
@@ -156,5 +171,7 @@ if __name__ == "__main__":
     sunflower.statistical_data()
 
     print("\n=== Anonymous")
-    Plant.show()
+    Plant.class_show()
+    print("[statistics for Unknown plant]")
+    Plant.class_statistical_data()
     
