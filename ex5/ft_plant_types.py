@@ -12,7 +12,7 @@ class Plant:
     def age(self) -> None:
         self._age += 1
 
-    def get_heigh(self) -> float:
+    def get_height(self) -> float:
         return self._height
 
     def get_age(self) -> int:
@@ -72,15 +72,15 @@ class Tree(Plant):
         print(f"Trunk diameter: {self.trunk_diameter}cm")
 
     def produce_shade(self) -> None:
-        print(f"Tree Oak now produces a shade of {self._height}cm", end="")
+        print(f"Tree {self.name} now produces a shade of {self._height}cm", end="")
         print(f"long and {self.trunk_diameter}cm wide")
 
 
-class Vagetabel(Plant):
+class Vegetable(Plant):
     def __init__(self, name: str, height: int, age: int, harvest_season):
         super().__init__(name, height, age)
         self.harvest_season = harvest_season
-        self.nutritional_value = 0
+        self.nutritional_value = 0.0
 
     def show(self) -> None:
         super().show()
