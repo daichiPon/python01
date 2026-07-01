@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 class Plant:
-    def __init__(self, name: str, height: int, day: int) -> None:
+    def __init__(self, name: str, height: float, day: int) -> None:
         self.name = name
         self.height = height
         self.day = day
@@ -9,7 +9,7 @@ class Plant:
     def show(self) -> None:
         print(f"{self.name}: {self.height}cm, {self.day}days old")
 
-    def grow(self, daygrow:int) -> None:
+    def grow(self, daygrow: float) -> None:
         self.daygrow = daygrow
         self.height = round(self.height + self.daygrow, 2)
         self.day += 1
